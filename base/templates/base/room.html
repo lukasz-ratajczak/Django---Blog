@@ -5,11 +5,26 @@
     <style>
         .room-container {
             display: grid;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 1fr 0.5fr 3fr 1fr;
         }
     </style>
 
+
+
     <div class="room-container">
+    <div>
+        {% include 'base/topic_component.html' %}
+    </div>
+        <div>
+            <h3>Participants</h3>
+            <hr>
+            {% for user in participants %}
+                <div>
+                    <p>@{{ user.username }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
         <div>
 
             <h1>{{ room.name }}</h1>
@@ -41,13 +56,7 @@
         </div>
 
         <div>
-            <h3>Participants</h3>
-            <hr>
-            {% for user in participants %}
-                <div>
-                    <p>@{{ user.username }}</p>
-                </div>
-            {% endfor %}
+            {% include 'base/activity_component.html' %}
         </div>
 
     </div>
