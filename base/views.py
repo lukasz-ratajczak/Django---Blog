@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, TopicForm
 
 
 def login_page(request):
@@ -151,3 +151,13 @@ def delete_message(request, pk):
         message.delete()
         return redirect('home')
     return render(request,'base/delete.html', {'obj':message})
+
+def create_topic(request):
+    form = TopicForm()
+    if request.method == 'POST':
+        Topic.objects.create(
+            name=request.POST.get('name')
+        )
+
+    context = {'form': form, }
+    return render(request, 'base/topic_form.html', context)
